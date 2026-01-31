@@ -2,16 +2,13 @@ const jwt = require("jsonwebtoken");
 
 const secret = "secret";
 
-function makeUser(body) {
-	{
-		(_id, fullName, email);
-	}
+function makeUser(user) {
 	const token = jwt.sign(
 		{
-			_id,
-			fullName,
-			email,
-			role: "USER",
+			_id: user._id,
+			fullName: user.fullName,
+			email: user.email,
+			role: user.role,
 		},
 		secret,
 	);
