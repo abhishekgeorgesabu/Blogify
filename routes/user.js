@@ -1,4 +1,4 @@
-const { Router } = require("express");
+const { Router, response } = require("express");
 const User = require("../models/user");
 
 const { makeUser } = require("../services/auth");
@@ -37,6 +37,17 @@ router.get("/login", (req, res) => {
 	return res.render("login");
 });
 
-router.post("/login", (req, res) => {});
+router.post("/login", async (req, res) => {
+	const { email, password } = req.body;
+	if (!req.body || !email || !password) {
+		console.log("Enter all fields");
+		return res.redirect("/login");
+	}
+	let user = await User.findOne({ email });
+	if (!user) return res.send({ msg: "No such user found" });
+
+	const token = makeUser(user);
+	return res.cookie(token).redirect("/");
+});
 
 module.exports = router;

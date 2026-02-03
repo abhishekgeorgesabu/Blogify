@@ -16,6 +16,16 @@ function makeUser(user) {
 	return token;
 }
 
+function getUser(cookie) {
+	try {
+		const user = jwt.verify(cookie, secret);
+		return user;
+	} catch (err) {
+		return null;
+	}
+}
+
 module.exports = {
 	makeUser,
+	getUser,
 };
