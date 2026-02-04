@@ -1,4 +1,4 @@
-const { Router, response } = require("express");
+const { Router } = require("express");
 const User = require("../models/user");
 
 const { makeUser } = require("../services/auth");
