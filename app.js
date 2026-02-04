@@ -19,6 +19,7 @@ app.use(cookieParser());
 app.use(checkAuth);
 
 app.get("/", (req, res) => {
+	console.log(req.user);
 	return res.render("homepage");
 });
 

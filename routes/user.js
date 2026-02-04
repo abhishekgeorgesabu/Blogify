@@ -28,7 +28,7 @@ router.post("/signup", async (req, res) => {
 
 	const token = makeUser(user);
 
-	return res.cookie(token).redirect("/");
+	return res.cookie("token", token).redirect("/");
 });
 
 // Login
@@ -47,7 +47,7 @@ router.post("/login", async (req, res) => {
 	if (!user) return res.send({ msg: "No such user found" });
 
 	const token = makeUser(user);
-	return res.cookie(token).redirect("/");
+	return res.cookie("token", token).redirect("/");
 });
 
 module.exports = router;
