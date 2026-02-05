@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 connectMongoDb("mongodb://127.0.0.1:27017/blogify");
 
 const userRoute = require("./routes/user");
+const Blog = require("./models/blog");
 const { checkAuth } = require("./middleware/auth");
 
 const app = express();
@@ -18,7 +19,8 @@ app.use(cookieParser());
 
 app.use(checkAuth);
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
+	const allBlogs = await Blog.find({});
 	return res.render("homepage", {
 		blogs: allBlogs,
 	});

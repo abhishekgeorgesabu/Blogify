@@ -7,6 +7,10 @@ const blogSchema = new Schema(
 			required: false,
 			default: "/images/default.jpeg",
 		},
+		title: {
+			type: String,
+			required: false,
+		},
 		content: {
 			type: String,
 			required: true,
