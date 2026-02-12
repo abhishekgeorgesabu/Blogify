@@ -6,8 +6,10 @@ const cookieParser = require("cookie-parser");
 connectMongoDb("mongodb://127.0.0.1:27017/blogify");
 
 const userRoute = require("./routes/user");
+const blogRoute = require("./routes/blog");
+
 const Blog = require("./models/blog");
-const { checkAuth } = require("./middleware/auth");
+const { checkAuth, restrictTo } = require("./middleware/auth");
 
 const app = express();
 
@@ -27,6 +29,7 @@ app.get("/", async (req, res) => {
 });
 
 app.use("/user", userRoute);
+app.use("/blog", restrictTo("USER"), blogRoute);
 
 const PORT = 8000;
 app.listen(PORT, () => {
